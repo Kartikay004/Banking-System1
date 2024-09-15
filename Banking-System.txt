@@ -1,0 +1,136 @@
+import json
+
+
+with open(r"C:\\New folder\\bank3.json.txt", 'r') as file:
+    data = json.load(file)
+    AllKeys=data.keys()
+    
+
+      
+choice = "yes"
+print("SHRI GANESHAY NAMAH")
+print("WELCOME  IN KARTIKAY's ATM ")
+print("What do you want to do in this ATM")
+print("Type 1 For BANK BALANCE")
+print("Type 2 for WITHDRAW the Money")
+print("Type 3 for Transfer the money")
+print("Type 4 for DEPOSIT the money")
+
+def bankBalance():
+        
+
+    
+        acc=input("Enter the account number")
+        if acc in AllKeys:
+            
+            pswd=input("Enter the password")
+
+           
+            if pswd==str(data[acc]):
+                     print("Your Bank BAlance is: ",data[pswd])
+                     choice=input("If you want to check another thing Type yes\no")
+            
+            else:
+
+                
+                 print("you entered Wrong Password:")
+                 bankBalance()
+                
+                      
+                
+                
+        else:
+           
+            print("you entered Wrong Acconut number:")
+            bankBalance()
+            
+            
+def withdraw():
+     acc=input("Enter the account number")
+     if acc in AllKeys:
+         
+            pswd=input("Enter the password")
+            print(pswd)
+            print(type(data[acc]))
+            if pswd==str(data[acc]):
+                amnt=int(input("Enter th amonut which you want to withdraw"))
+                if amnt<=data[pswd]:
+                    data[pswd]=data[pswd]-amnt
+                    
+                    
+                    print("Your amonut of rupees: ",amnt,"is Deposited")
+                    saved()
+                else:
+                    print("You don't have sufficient amonut to withdraw of amount: ",amnt)
+            else:
+                print("You Entered wrong Password Please enter details again")
+                withdraw()
+     else:
+         
+         print("You Entered Wrong Account Number:")
+         withdraw()
+def transfer():
+     acc=input("Enter the account number")
+     if acc in AllKeys:
+            pswd=input("Enter the password")
+            print(pswd)
+            
+            if pswd==str(data[acc]):
+                amnt=int(input("Enter the amonut which you want to transfer"))
+                if amnt<=data[pswd]:
+
+                    acc2=input("Enter the account number in which do you want to transfer")
+
+                    pswd2=input("Enter the password for that account")
+                    
+                    data[pswd]=data[pswd]- amnt
+                    data[pswd2]=data[pswd2]+ amnt
+                    print("YOUR AMONUT IS TRANSFERRED")
+                    saved()
+                    x=input("If You want to check bank balance of your acconut now then TYPE AMOUNT")
+                    if x=="AMOUNT":
+                       bankBalance()
+                    else:
+                       pass
+                    
+                    
+                else:
+                    print("You do not have sufficient amonut")
+def deposit():
+      acc=input("Enter the account number")
+      if acc in AllKeys:
+            pswd=input("Enter the password")
+            print(pswd)
+            
+            if pswd==str(data[acc]):
+                amnt=int(input("Enter the amonut which you want to deposit"))
+                data[pswd]=data[pswd]+amnt
+                saved()
+                print("Your Amonut is deposited")
+                x=input("Type AMOUNT If you want to check bank balance")
+                if x=="AMOUNT":
+                    bankBalance()
+                else:
+                    pass
+    
+    
+def saved():
+    with open(r"C:\\New folder\\bank3.json.txt", 'w') as file:
+        json.dump(data, file)                    
+    
+while choice == "yes":
+    k=int(input("Enter youe choice"))
+    if k==1:
+      bankBalance()
+      choice=input("Enter the choice if you want to continue yes/no")
+    elif k==2:
+        withdraw()
+        choice=input("Enter the choice if you want to continue yes/no")
+    elif k==3:
+        transfer()
+        choice=input("Enter the choice if you want to continue yes/no")
+    elif k==4:
+        deposit()
+    else:
+        print("KARYA PRAGATI PAR HAI")
+        choice=input("Enter the choice if you want to continue yes/no")

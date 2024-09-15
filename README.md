@@ -4,9 +4,7 @@ import json
 with open(r"C:\\New folder\\bank3.json.txt", 'r') as file:
     data = json.load(file)
     AllKeys=data.keys()
-    
-
-      
+          
 choice = "yes"
 print("SHRI GANESHAY NAMAH")
 print("WELCOME  IN KARTIKAY's ATM ")
